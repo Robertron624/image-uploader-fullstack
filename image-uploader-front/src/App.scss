@@ -8,6 +8,24 @@
   text-align: center;
 }
 
+.btn {
+  background-color: transparent;
+  border: none;
+}
+
+.btn--primary {
+  border-radius: 8px;
+  background: var(--Blue-1, #2F80ED);
+  color: #fff;
+
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.42px;
+}
+
 section.container {
   width: 402px;
   height: 469px;
@@ -19,27 +37,39 @@ section.container {
   padding: 36px 32px;
 
   .inner {
-    .main-title {
-      color: var(--Gray-2, #4F4F4F);
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      letter-spacing: -0.63px;
+    .top-texts {
+      margin-bottom: 1rem,;
+      .main-title {
+        color: var(--Gray-2, #4F4F4F);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.63px;
+      }
+  
+      .main-subtitle {
+        margin-top: 1rem;
+  
+        color: var(--Gray-3, #828282);
+        text-align: center;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.35px;
+      }
     }
 
-    .main-subtitle {
-      margin-top: 1rem;
+    .bottom-items {
+      margin-top: 19px;
 
-      color: var(--Gray-3, #828282);
-      text-align: center;
-      font-size: 10px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      letter-spacing: -0.35px;
+      .btn--primary  {
+        width: 101px;
+        height: 31.984px;
+        margin-top: 29.62px;
+      }
     }
-
   }
 
 
