@@ -1,5 +1,14 @@
 import "./UploadedImage.scss";
-const UploadedImage = ({url="https:/image.com"}: {url?: string}) => {
+
+interface UploadedImageProps {
+    uploadedImageUrl?: string;
+}
+const UploadedImage = ({uploadedImageUrl}: UploadedImageProps) => {
+
+    const copyToClipboard = () => {
+        if(!uploadedImageUrl) return
+        navigator.clipboard.writeText(uploadedImageUrl)
+    }
 
     return (
         <div className="uploaded-container">
@@ -21,11 +30,11 @@ const UploadedImage = ({url="https:/image.com"}: {url?: string}) => {
                 <h2>Uploaded Successfully!</h2>
             </div>
             <div className="image-container">
-                <img src={url} alt="uploaded image" />
+                <img src={uploadedImageUrl} alt="uploaded image" />
             </div>
             <div className="bottom-items">
-                <input type="text" readOnly value={url} />
-                <button className="btn">
+                <input type="text" readOnly value={uploadedImageUrl} />
+                <button onClick={copyToClipboard} className="btn">
                     Copy Link
                 </button>
             </div>

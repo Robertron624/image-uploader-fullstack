@@ -1,8 +1,7 @@
 import './ImagePlacer.scss'
 import Dropzone from 'react-dropzone'
 
-
-interface AcceptedFiles {
+export interface AcceptedFiles {
   name: string
   size: number
   type: string
@@ -19,10 +18,14 @@ const style = {
   justifyContent: 'center',
 }
 
+interface ImagePlacerProps {
+  setCurrentImage: React.Dispatch<React.SetStateAction<File | null>>
+}
 
-const ImagePlacer = () => {
+const ImagePlacer = ({setCurrentImage}:ImagePlacerProps) => {  
+
   return (
-    <Dropzone onDrop={(acceptedFiles: AcceptedFiles) => console.log(acceptedFiles)}>
+    <Dropzone onDrop={(acceptedFiles:File) => setCurrentImage(acceptedFiles)}>
       {({getRootProps, getInputProps}: {getRootProps: any, getInputProps: any}) => (
           <div className='image-placer'>
             <div {...getRootProps({style})}>
@@ -33,7 +36,6 @@ const ImagePlacer = () => {
                 <p className="placeholder-text">
                   Drag & Drop your image here
                 </p>
-
               </div>
             </div>
           </div>
@@ -41,5 +43,6 @@ const ImagePlacer = () => {
     </Dropzone>
   )
 }
+
 
 export default ImagePlacer
