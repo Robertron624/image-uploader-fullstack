@@ -20,7 +20,13 @@ const MainUploader = ({
     const baseUrl = "https://api.imgbb.com/1/upload";
 
     const makeRequest = async () => {
-        if (!currentImage) return;
+
+        const placer = document.querySelector(".image-placer div[role='presentation']") as HTMLDivElement;
+        if (!currentImage) {
+            console.log("No image selected")
+            placer?.click();
+            return;
+        }
 
         const formData = new FormData();
         formData.append("image", currentImage[0]);
@@ -28,14 +34,11 @@ const MainUploader = ({
 
         try {
             setAppState(AppState.LOADING);
-            // Realiza la solicitud manualmente usando axios
             const response = await axios.post<dataImgBB>(baseUrl, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
-
-            console.log("RESPONSE -> ", response.data.data.url);
 
             setUploadedImageUrl(response.data.data.url);
             setAppState(AppState.SUCCESS);
@@ -57,7 +60,9 @@ const MainUploader = ({
                 <div className="bottom-items">
                     <p>Or</p>
                     <button onClick={makeRequest} className="btn btn--primary">
-                        Choose a file
+                        {
+                            currentImage ? "Upload File" : "Choose a file"
+                        }
                     </button>
                 </div>
             </div>
