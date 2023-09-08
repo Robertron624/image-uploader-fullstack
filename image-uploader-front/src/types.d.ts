@@ -1,3 +1,7 @@
+export interface dataImgBB {
+    data: ImgBBResponse;
+}
+
 export interface ImgBBResponse {
     id: string;
     title: string;

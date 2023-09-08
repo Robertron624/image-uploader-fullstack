@@ -19,14 +19,14 @@ const style = {
 }
 
 interface ImagePlacerProps {
-  setCurrentImage: React.Dispatch<React.SetStateAction<File | null>>
+  setCurrentImage: React.Dispatch<React.SetStateAction<File[] | null>>
 }
 
 const ImagePlacer = ({setCurrentImage}:ImagePlacerProps) => {  
 
   return (
-    <Dropzone onDrop={(acceptedFiles:File) => setCurrentImage(acceptedFiles)}>
-      {({getRootProps, getInputProps}: {getRootProps: any, getInputProps: any}) => (
+    <Dropzone onDrop={(acceptedFiles:File[]) => setCurrentImage(acceptedFiles)}>
+      {({getRootProps, getInputProps}) => (
           <div className='image-placer'>
             <div {...getRootProps({style})}>
               <input {...getInputProps()} />

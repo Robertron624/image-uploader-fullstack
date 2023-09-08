@@ -1,49 +1,48 @@
+import { useState } from "react";
+import axios from "axios";
+
 import ImagePlacer from "./ImagePlacer";
 import { AppState } from "../contants";
-import './MainUploader.scss'
-import { useState } from "react";
-import axios from 'axios'
+import "./MainUploader.scss";
+import { dataImgBB } from "../types";
 
 interface MainUploaderProps {
-    setAppState: React.Dispatch<React.SetStateAction<number>>
-    setUploadedImageUrl: React.Dispatch<React.SetStateAction<string>>
+    setAppState: React.Dispatch<React.SetStateAction<number>>;
+    setUploadedImageUrl: React.Dispatch<React.SetStateAction<string>>;
 }
-const MainUploader = ({setAppState, setUploadedImageUrl}: MainUploaderProps) => {
+const MainUploader = ({
+    setAppState,
+    setUploadedImageUrl,
+}: MainUploaderProps) => {
+    const [currentImage, setCurrentImage] = useState<File[] | null>(null);
 
-    const [ currentImage, setCurrentImage ] = useState<File | null>(null)
+    const apiKey = import.meta.env.VITE_API_KEY;
+    const baseUrl = "https://api.imgbb.com/1/upload";
 
     const makeRequest = async () => {
+        if (!currentImage) return;
 
-        const apiKey = import.meta.env.VITE_API_KEY;
-
-        const baseUrl = "https://api.imgbb.com/1/upload";
-
-        console.log("currentImage in State -> ", currentImage)
-        console.log("currentImage in State type -> ", typeof currentImage)
-
-        console.log("apiKey -> ", apiKey)
-
-        if(!currentImage) return
+        const formData = new FormData();
+        formData.append("image", currentImage[0]);
+        formData.append("key", apiKey || "");
 
         try {
-            const formData = new FormData();
-            // @ts-ignore
-            formData.append("image", currentImage[0]);
-            formData.append("key", apiKey || "");
-            const response = await axios.post(baseUrl, formData, {
+            setAppState(AppState.LOADING);
+            // Realiza la solicitud manualmente usando axios
+            const response = await axios.post<dataImgBB>(baseUrl, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            console.log("RESPONSE -> ", response.data)
 
-            setUploadedImageUrl(response.data.data.url)
-            setAppState(AppState.SUCCESS)
-        }catch(error){
-            console.log("ERROR -> ", error)
+            console.log("RESPONSE -> ", response.data.data.url);
+
+            setUploadedImageUrl(response.data.data.url);
+            setAppState(AppState.SUCCESS);
+        } catch (error) {
+            console.log("ERROR -> ", error);
         }
-
-    }
+    };
 
     return (
         <section className="container">
@@ -57,7 +56,9 @@ const MainUploader = ({setAppState, setUploadedImageUrl}: MainUploaderProps) => 
                 <ImagePlacer setCurrentImage={setCurrentImage} />
                 <div className="bottom-items">
                     <p>Or</p>
-                    <button onClick={makeRequest} className="btn btn--primary">Choose a file</button>
+                    <button onClick={makeRequest} className="btn btn--primary">
+                        Choose a file
+                    </button>
                 </div>
             </div>
         </section>

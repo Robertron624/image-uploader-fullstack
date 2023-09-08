@@ -1,9 +1,11 @@
 import { useState } from "react";
+
 import "./App.scss";
 import Loading from "./components/Loading";
 import MainUploader from "./components/MainUploader";
 import UploadedImage from "./components/UploadedImage";
 import { AppState } from "./contants";
+
 
 function App() {
     const [appState, setAppState] = useState<AppState>(AppState.IDLE);
