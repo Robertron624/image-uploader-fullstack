@@ -56,9 +56,11 @@ const MainUploader = ({
                         File should be Jpeg, Png,...
                     </p>
                 </div>
-                <ImagePlacer setCurrentImage={setCurrentImage} />
+                <ImagePlacer setCurrentImage={setCurrentImage} currentImage={currentImage} />
                 <div className="bottom-items">
-                    <p>Or</p>
+                    <p>
+                        {currentImage ? null : "Or"}
+                    </p>
                     <button onClick={makeRequest} className="btn btn--primary">
                         {
                             currentImage ? "Upload File" : "Choose a file"
