@@ -1,0 +1,49 @@
+.loading-container {
+    width: 400.359px;
+    height: 143.566px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+    text-align: left;
+
+    padding: 36px 27.65px 43.82px 32px;
+
+    p {
+        color: var(--Gray-2, #4F4F4F);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.63px;
+    }
+
+    .loading-bar {
+        width:  340.711px;
+        height: 6px;
+        border-radius: 8px;
+        background: var(--Gray-6, #F2F2F2);
+        margin-top: 16px;
+        position: relative;
+        overflow: hidden;
+
+        .loading-bar__progress {
+            position: absolute;
+            width: 100px;
+            height: 6px;
+            background: var(--Blue-1, #2F80ED);
+            border-radius: 8px;
+            animation: loading 1.5s infinite;
+
+        }
+
+        /* Creating the animation to simulate bar going from left to right and when reach the end appear in the left */
+        @keyframes loading {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+    }
+}

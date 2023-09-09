@@ -1,0 +1,36 @@
+.image-placer {
+    width: 338px;
+    height: 218.903px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    border: 1px dashed #97bef4;
+    background: #f6f8fb;
+
+    // background-image: url(/mountain.jfif);
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: center;
+
+    .placeholders {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+
+        .placeholder-image {
+            width: 114.131px;
+            height: 88.241px;
+        }
+
+        .placeholder-text {
+            color: var(--Gray-4, #bdbdbd);
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: -0.42px;
+        }
+    }
+
+}
