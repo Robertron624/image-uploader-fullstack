@@ -11,14 +11,25 @@
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](./screenshot.png)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
 
 - Where can I see your demo?
+
+
 - What was your experience?
+  Creating this project was a lot of fun. I learned a lot about React and how to use the FileReader API to read the file, manage the three application states (idle, loading, success), and upload the file to ImgBB.
+  Because the figma design is locked, I had to make some changes to the design (placeholder image and checkmark circle icon). I also added a toast component to show the user when the image is uploaded and when the link is copied to the clipboard.
+
 - What have you learned/improved?
+  I learned to use drag and drop in React, I learned how to use the FileReader API to read the file and convert it to a base64 string and then upload it to ImgBB
+  
+  .I also learned how to use the clipboard API to copy the image link to the clipboard. I also learned how to create a custom toast component in React.
+
 - Your wisdom?
+If you are only planning on using the frontend, you can use ImgBB's API to upload the image and get the link, it will save you time and money.
+I recommend to create your own custom toast component instead of using a library like react-toastify. It will keep your bundle size down, it will be easier to customize, and you will learn a lot.
+Make use of TypeScript features like interfaces, types and enums. It will save you a lot of time and headaches.
 
 ### Built With
 
