@@ -2,12 +2,14 @@ import "./UploadedImage.scss";
 
 interface UploadedImageProps {
     uploadedImageUrl?: string;
+    showToast: (message: string, type: string) => void;
 }
-const UploadedImage = ({uploadedImageUrl}: UploadedImageProps) => {
+const UploadedImage = ({uploadedImageUrl, showToast}: UploadedImageProps) => {
 
     const copyToClipboard = () => {
         if(!uploadedImageUrl) return
         navigator.clipboard.writeText(uploadedImageUrl)
+        showToast("Copied to clipboard", "success")
     }
 
     return (
