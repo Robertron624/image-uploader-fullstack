@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Toast from "./Toast";
 import "./ToastList.scss";
-import { ToastData } from "../../contants";
+import { ToastData } from "../../constants";
 
 interface ToastListProps {
     data: ToastData[] | [];

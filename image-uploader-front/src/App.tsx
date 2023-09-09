@@ -4,7 +4,7 @@ import "./App.scss";
 import Loading from "./components/Loading";
 import MainUploader from "./components/MainUploader";
 import UploadedImage from "./components/UploadedImage";
-import { AppState, ToastData, ToastPosition } from "./contants";
+import { AppState, ToastData, ToastPosition } from "./constants";
 import ToastList from "./components/Toasts/ToastList";
 
 const ToastDefaults = {

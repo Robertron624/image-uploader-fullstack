@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import ImagePlacer from "./ImagePlacer";
-import { AppState } from "../contants";
+import { AppState } from "../constants";
 import "./MainUploader.scss";
 import { dataImgBB } from "../types";
 
