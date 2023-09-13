@@ -1,12 +1,20 @@
+require('dotenv').config();
 import express, {Express, Request, Response, Application } from "express";
+import cors from "cors";
+import imageRouter from "./routes/image.router";
 
-const PORT = 3000;
+const PORT = process.env.PORT || 4000;
 
 const app: Application = express();
 
+app.use(cors());
+app.use(express.json());
+
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
+    res.send("All good!");
 });
+
+app.use("/api/v1", imageRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
