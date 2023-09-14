@@ -5,9 +5,11 @@ import { Request } from "express";
 import ImageModel from "../models/image.model";
 import { MulterFile, MulterCallback } from "../interfaces";
 
+const uploadDir = path.join(__dirname, "../../public/uploads");
+
 const storage = multer.diskStorage({
     destination: (_: Request, file: MulterFile, callback: MulterCallback) => {
-        callback(null, path.join(__dirname, "../../public/uploads"));
+        callback(null, uploadDir);
     },
     filename: (_: Request, file: MulterFile, callback: MulterCallback) => {
         callback(null, file.originalname);
@@ -64,4 +66,23 @@ export const deleteImageService = async (id: string) => {
     const imagePath = path.join(__dirname, "../../public/uploads");
 
     return deleteImageFromDisk(imagePath, deletedImage.image);
+};
+
+export const deleteAllImagesService = async () => {
+    const deletedImages = await ImageModel.deleteMany({});
+
+    console.log("Deleted images: ", deletedImages);
+
+    fs.readdir(uploadDir, (err, files) => {
+        if (err) throw err;
+        for (const file of files) {
+            const fileDeleted = deleteImageFromDisk(uploadDir, file);
+            if (!fileDeleted) {
+                console.log(`Unable to delete file : ${file}`);
+                throw `Unable to delete file : ${file}`;
+            }
+        }
+    });
+
+    return true;
 };

@@ -3,7 +3,8 @@ import {
     getAllImages,
     getImageById,
     addImage,
-    deleteImage
+    deleteImage,
+    deleteAllImages,
 } from "../handlers/image.handler";
 import { upload } from "../services/image.service";
 
@@ -15,6 +16,8 @@ imageRouter.get("/images/:id", getImageById);
 imageRouter.post("/images", upload.single("image"), addImage);
 
 imageRouter.delete("/images/:id", deleteImage);
+
+imageRouter.delete("/images", deleteAllImages);
 
 
 export default imageRouter;
