@@ -1,22 +1,20 @@
 import fs from "fs";
-const multer = require('multer');
+const multer = require("multer");
 import path from "path";
-import { Request, Response } from "express";
+import { Request } from "express";
 import ImageModel from "../models/image.model";
+import { MulterFile, MulterCallback } from "../interfaces";
 
 const storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-        // guardar la imagen en la carpeta uploads dentro del directorio public
-        callback(null, path.join(__dirname, '../../public/uploads'));
-      },
-      filename: (req, file, callback) => {
-        // Puedes configurar cómo deseas nombrar los archivos aquí
-        // Por ejemplo, puedes mantener el nombre original del archivo:
+    destination: (_: Request, file: MulterFile, callback: MulterCallback) => {
+        callback(null, path.join(__dirname, "../../public/uploads"));
+    },
+    filename: (_: Request, file: MulterFile, callback: MulterCallback) => {
         callback(null, file.originalname);
-      },
+    },
 });
 
-export const upload = multer({ storage: storage});
+export const upload = multer({ storage: storage });
 
 export const getAllImagesService = async () => {
     return await ImageModel.find();
@@ -26,7 +24,7 @@ export const getImageByIdService = async (id: string) => {
     return await ImageModel.findById(id);
 };
 
-export const addImageService = async (file:any) => {
+export const addImageService = async (file: MulterFile) => {
     const currentDate = new Date();
 
     const newImage = new ImageModel({
