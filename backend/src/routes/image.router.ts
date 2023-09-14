@@ -3,15 +3,18 @@ import {
     getAllImages,
     getImageById,
     addImage,
+    deleteImage
 } from "../handlers/image.handler";
 import { upload } from "../services/image.service";
 
 const imageRouter = express.Router();
 
 imageRouter.get("/images", getAllImages);
+imageRouter.get("/images/:id", getImageById);
 
 imageRouter.post("/images", upload.single("image"), addImage);
 
-imageRouter.route("/images/:id").get(getImageById);
+imageRouter.delete("/images/:id", deleteImage);
+
 
 export default imageRouter;

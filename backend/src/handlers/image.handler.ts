@@ -3,6 +3,7 @@ import {
     getAllImagesService,
     getImageByIdService,
     addImageService,
+    deleteImageService,
 } from "../services/image.service";
 
 export const getAllImages = async (req: Request, res: Response) => {
@@ -50,3 +51,21 @@ export const addImage = async (
         res.status(500).json({ message: "Unable to add image" });
     }
 };
+
+export const deleteImage = async (req: Request, res: Response) => {
+
+    const { id } = req.params;
+
+    try {
+        const image = await deleteImageService(id);
+
+        if (!image) {
+            return res.status(404).json({ message: "Image not found" });
+        }
+
+        res.status(200).json({ message: "Image deleted successfully" });
+    } catch (error: any) {
+        console.error("Error: ", error);
+        res.status(500).json({ message: "Unable to delete image" });
+    }
+}

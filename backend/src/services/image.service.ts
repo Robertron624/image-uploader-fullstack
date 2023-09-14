@@ -37,3 +37,31 @@ export const addImageService = async (file: MulterFile) => {
 
     return await newImage.save();
 };
+
+const deleteImageFromDisk = (imagePath: string, file: string) => {
+    try {
+        fs.unlinkSync(`${imagePath}/${file}`);
+        return true;
+    } catch (err) {
+        console.log("Error, unable to delete the image 💥", file, err);
+        return 0;
+    }
+};
+
+export const deleteImageService = async (id: string) => {
+    const image = await getImageByIdService(id);
+
+    if (!image) {
+        return false;
+    }
+
+    const deletedImage = await ImageModel.findByIdAndDelete(id);
+
+    if (!deletedImage) {
+        return false;
+    }
+
+    const imagePath = path.join(__dirname, "../../public/uploads");
+
+    return deleteImageFromDisk(imagePath, deletedImage.image);
+};
