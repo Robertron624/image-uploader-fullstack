@@ -12,36 +12,27 @@ export interface AcceptedFiles {
     webkitRelativePath: string;
 }
 
-const style = {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-};
-
 interface ImagePlacerProps {
     setCurrentImage: React.Dispatch<React.SetStateAction<File[] | null>>;
     currentImage: File[] | null;
 }
 
 const ImagePlacer = ({ setCurrentImage, currentImage }: ImagePlacerProps) => {
+    const imagePlacerRef = useRef<HTMLDivElement>(null);
 
-  const imagePlacerRef = useRef<HTMLDivElement>(null);
-
-  // When there is an image, add the image to image-placer div as a background image
-  useEffect(() => {
-    if (currentImage) {
-      const reader = new FileReader();
-      reader.readAsDataURL(currentImage[0]);
-      reader.onload = () => {
-        const placer = imagePlacerRef.current as HTMLDivElement;
-        placer.style.backgroundImage = `url(${reader.result})`;
-        placer.style.backgroundSize = "cover";
-        placer.style.backgroundPosition = "center";
-      };
-    }
-  }, [currentImage]);
+    // When there is an image, add the image to image-placer div as a background image
+    useEffect(() => {
+        if (currentImage) {
+            const reader = new FileReader();
+            reader.readAsDataURL(currentImage[0]);
+            reader.onload = () => {
+                const placer = imagePlacerRef.current as HTMLDivElement;
+                placer.style.backgroundImage = `url(${reader.result})`;
+                placer.style.backgroundSize = "cover";
+                placer.style.backgroundPosition = "center";
+            };
+        }
+    }, [currentImage]);
 
     return (
         <Dropzone
@@ -49,7 +40,7 @@ const ImagePlacer = ({ setCurrentImage, currentImage }: ImagePlacerProps) => {
         >
             {({ getRootProps, getInputProps }) => (
                 <div className="image-placer" ref={imagePlacerRef}>
-                    <div {...getRootProps({ style })}>
+                    <div className="inner" {...getRootProps()}>
                         <input {...getInputProps()} />
                         {currentImage ? null : (
                             <div className="placeholders">
