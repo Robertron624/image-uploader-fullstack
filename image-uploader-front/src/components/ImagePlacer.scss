@@ -7,10 +7,13 @@
     border: 1px dashed #97bef4;
     background: #f6f8fb;
 
-    // background-image: url(/mountain.jfif);
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    // background-position: center;
+    .inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
     .placeholders {
         display: flex;

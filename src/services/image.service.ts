@@ -7,12 +7,17 @@ import { MulterFile, MulterCallback } from "../interfaces";
 
 const uploadDir = path.join(__dirname, "../../public/uploads");
 
+// function to change white spaces in image name to hyphens
+const changeSpaceToHyphen = (filename: string) => {
+    return filename.replace(/\s/g, "-").toLowerCase();
+};
+
 const storage = multer.diskStorage({
     destination: (_: Request, file: MulterFile, callback: MulterCallback) => {
         callback(null, uploadDir);
     },
     filename: (_: Request, file: MulterFile, callback: MulterCallback) => {
-        callback(null, file.originalname);
+        callback(null, changeSpaceToHyphen(file.originalname));
     },
 });
 
@@ -30,9 +35,9 @@ export const addImageService = async (file: MulterFile) => {
     const currentDate = new Date();
 
     const newImage = new ImageModel({
-        image: file.filename,
+        image: changeSpaceToHyphen(file.originalname),
         originalName: file.originalname,
-        path: `/images/${file.filename}`,
+        path: `/public/uploads/${file.filename}`,
         createdAt: currentDate,
         lastUpdated: currentDate,
     });

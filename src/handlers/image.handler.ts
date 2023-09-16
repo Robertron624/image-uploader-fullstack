@@ -1,4 +1,4 @@
-import { Request, Response, Express } from "express";
+import { Request, Response } from "express";
 import {
     getAllImagesService,
     getImageByIdService,

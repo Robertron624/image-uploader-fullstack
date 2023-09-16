@@ -5,6 +5,10 @@ const imageSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    path: {
+        type: String,
+        required: true,
+    },
     originalName: String,
     createdAt: {
         type: Date,
