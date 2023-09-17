@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 import express, { Request, Response, Application } from "express";
 import cors from "cors";
 import imageRouter from "./routes/image.router";
@@ -6,7 +6,10 @@ import connectToMongo from "./utils/mongoDB";
 
 const PORT = process.env.PORT || 4000;
 
+
 const app: Application = express();
+
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
