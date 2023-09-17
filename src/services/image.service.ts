@@ -1,5 +1,5 @@
 import fs from "fs";
-const multer = require("multer");
+import multer from "multer";
 import path from "path";
 import { Request } from "express";
 import ImageModel from "../models/image.model";

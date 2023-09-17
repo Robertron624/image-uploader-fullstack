@@ -1,5 +1,5 @@
-require('dotenv').config();
-import express, {Express, Request, Response, Application } from "express";
+import dotenv from "dotenv";
+import express, { Request, Response, Application } from "express";
 import cors from "cors";
 import imageRouter from "./routes/image.router";
 import connectToMongo from "./utils/mongoDB";
