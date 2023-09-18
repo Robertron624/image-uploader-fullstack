@@ -16,3 +16,5 @@ export enum ToastPosition {
     BOTTOM_LEFT = "bottom-left",
     BOTTOM_RIGHT = "bottom-right",
 }
+
+export const baseApiUrl = "https://robertron-image-uploader.onrender.com"

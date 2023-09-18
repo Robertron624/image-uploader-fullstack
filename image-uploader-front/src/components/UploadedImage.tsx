@@ -1,4 +1,5 @@
 import "./UploadedImage.scss";
+import { baseApiUrl } from "../constants";
 
 interface UploadedImageProps {
     uploadedImageUrl?: string;
@@ -8,7 +9,7 @@ const UploadedImage = ({uploadedImageUrl, showToast}: UploadedImageProps) => {
 
     const copyToClipboard = () => {
         if(!uploadedImageUrl) return
-        navigator.clipboard.writeText(uploadedImageUrl)
+        navigator.clipboard.writeText(`${baseApiUrl}${uploadedImageUrl}`)
         showToast("Copied to clipboard", "success")
     }
 
@@ -32,10 +33,10 @@ const UploadedImage = ({uploadedImageUrl, showToast}: UploadedImageProps) => {
                 <h2>Uploaded Successfully!</h2>
             </div>
             <div className="image-container">
-                <img src={uploadedImageUrl} alt="uploaded image" />
+                <img src={`${baseApiUrl}${uploadedImageUrl}`} alt="uploaded image" />
             </div>
             <div className="bottom-items">
-                <input type="text" readOnly value={uploadedImageUrl} />
+                <input type="text" readOnly value={`${baseApiUrl}${uploadedImageUrl}`} />
                 <button onClick={copyToClipboard} className="btn">
                     Copy Link
                 </button>
