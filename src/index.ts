@@ -4,9 +4,6 @@ import cors from "cors";
 import imageRouter from "./routes/image.router";
 import connectToMongo from "./utils/mongoDB";
 
-const PORT = process.env.PORT || 4000;
-
-
 const app: Application = express();
 
 dotenv.config();
@@ -19,6 +16,11 @@ app.get("/", async(req: Request, res: Response) => {
 });
 
 app.use("/api/v1", imageRouter);
+
+// // Exposing the public folder to the world
+app.use("/public", express.static("public"));
+
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
