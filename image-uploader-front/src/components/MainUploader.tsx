@@ -2,9 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 
 import ImagePlacer from "./ImagePlacer";
-import { AppState } from "../constants";
+import { AppState, baseApiUrl } from "../constants";
 import "./MainUploader.scss";
-import { dataImgBB } from "../types";
+import { ImgBBResponse } from "../types";
 
 interface MainUploaderProps {
     setAppState: React.Dispatch<React.SetStateAction<number>>;
@@ -16,9 +16,7 @@ const MainUploader = ({
 }: MainUploaderProps) => {
     const [currentImage, setCurrentImage] = useState<File[] | null>(null);
 
-    const apiKey = import.meta.env.VITE_API_KEY;
-    const baseUrl = "https://api.imgbb.com/1/upload";
-
+    const baseUrl = `${baseApiUrl}/api/v1/images`
     const makeRequest = async () => {
 
         const placer = document.querySelector(".image-placer div[role='presentation']") as HTMLDivElement;
@@ -30,17 +28,16 @@ const MainUploader = ({
 
         const formData = new FormData();
         formData.append("image", currentImage[0]);
-        formData.append("key", apiKey || "");
 
         try {
             setAppState(AppState.LOADING);
-            const response = await axios.post<dataImgBB>(baseUrl, formData, {
+            const response = await axios.post<ImgBBResponse>(baseUrl, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
 
-            setUploadedImageUrl(response.data.data.url);
+            setUploadedImageUrl(response.data.path);
             setAppState(AppState.SUCCESS);
         } catch (error) {
             console.log("ERROR -> ", error);
